@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+.heritage-text {
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.heritage-ui {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
