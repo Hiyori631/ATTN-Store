@@ -41,7 +41,7 @@ function App() {
           <h1 className="heritage-text text-white text-3xl sm:text-4xl md:text-[72px] font-bold drop-shadow-lg">
 ATTN          </h1>
           <h1 className="heritage-text text-white text-3xl sm:text-4xl md:text-[72px] font-bold drop-shadow-lg">
-            STORE HEY
+            STORE WOW
           </h1>
 
           {/* ✅ Dynamic message from Django */}
