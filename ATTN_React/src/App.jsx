@@ -20,7 +20,7 @@ function App() {
       {/* Sidebar */}
       <Navbar />
 
-      {/* Main Contens\t */}
+      {/* Main Contenst */}
       <main
         className="
           flex-1 
