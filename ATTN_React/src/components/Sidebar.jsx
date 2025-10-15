@@ -4,18 +4,22 @@ import transactionIcon from "../assets/images/1341083-200.png";
 import inventoryIcon from "../assets/images/Untitled design.png";
 import analyticsIcon from "../assets/images/1341083-200.png";
 import dashboardIcon from "../assets/images/1341083-200.png";
-import { Menu, X } from "lucide-react"; // optional icons for hamburger
+import { Menu, X, ChevronDown } from "lucide-react"; // icons
 
 function Navbar() {
   const [active, setActive] = useState("Dashboard");
-  const [isOpen, setIsOpen] = useState(false); // for mobile toggless
+  const [isOpen, setIsOpen] = useState(false); // mobile sidebar toggle
+  const [openDropdown, setOpenDropdown] = useState(null); // which dropdown is open
 
-  const menuItems = [
-    { name: "Dashboard", icon: dashboardIcon },
-    { name: "Transaction", icon: transactionIcon },
-    { name: "Inventory", icon: inventoryIcon },
-    { name: "Analytics", icon: analyticsIcon },
-  ];
+  const handleItemClick = (name) => {
+    setActive(name);
+    setOpenDropdown(null);
+    setIsOpen(false);
+  };
+
+  const toggleDropdown = (name) => {
+    setOpenDropdown(openDropdown === name ? null : name);
+  };
 
   return (
     <>
@@ -55,30 +59,153 @@ function Navbar() {
 
           {/* Menu Items */}
           <ul className="mt-3 space-y-2 px-4">
-            {menuItems.map((item) => (
-              <li key={item.name}>
-                <button
-                  onClick={() => {
-                    setActive(item.name);
-                    setIsOpen(false); // auto-close on mobile
-                  }}
-                  className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 text-left ${
-                    active === item.name
-                      ? "bg-[#F8961E] text-white shadow-md"
-                      : "hover:bg-[#F8961E]/10 text-gray-800"
+            {/* Dashboard */}
+            <li>
+              <button
+                onClick={() => handleItemClick("Dashboard")}
+                className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 text-left ${
+                  active === "Dashboard"
+                    ? "bg-[#F8961E] text-white shadow-md"
+                    : "hover:bg-[#F8961E]/10 text-gray-800"
+                }`}
+              >
+                <img
+                  src={dashboardIcon}
+                  alt="Dashboard"
+                  className={`w-6 h-6 ${
+                    active === "Dashboard" ? "filter brightness-0 invert" : ""
                   }`}
-                >
+                />
+                <span className="font-medium text-lg">Dashboard</span>
+              </button>
+            </li>
+
+            {/* Transaction Dropdown */}
+            <li>
+              <button
+                onClick={() => toggleDropdown("Transaction")}
+                className={`w-full flex items-center justify-between p-3 rounded-lg transition-all duration-200 text-left ${
+                  active === "Transaction"
+                    ? "bg-[#F8961E] text-white shadow-md"
+                    : "hover:bg-[#F8961E]/10 text-gray-800"
+                }`}
+              >
+                <div className="flex items-center gap-3">
                   <img
-                    src={item.icon}
-                    alt={item.name}
+                    src={transactionIcon}
+                    alt="Transaction"
                     className={`w-6 h-6 ${
-                      active === item.name ? "filter brightness-0 invert" : ""
+                      openDropdown === "Transaction" ? "filter brightness-0 invert" : ""
                     }`}
                   />
-                  <span className="font-medium text-lg">{item.name}</span>
-                </button>
-              </li>
-            ))}
+                  <span className="font-medium text-lg">Transaction</span>
+                </div>
+                <ChevronDown
+                  className={`w-5 h-5 transition-transform duration-200 ${
+                    openDropdown === "Transaction" ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {openDropdown === "Transaction" && (
+                <ul className="ml-10 mt-2 space-y-2 text-gray-700">
+                  <li>
+                    <button
+                      onClick={() => handleItemClick("Sales Transactions")}
+                      className="hover:text-[#F8961E] transition"
+                    >
+                      Sales Transactions
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleItemClick("Purchase Transactions")}
+                      className="hover:text-[#F8961E] transition"
+                    >
+                      Purchase Transactions
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleItemClick("Reports")}
+                      className="hover:text-[#F8961E] transition"
+                    >
+                      Reports
+                    </button>
+                  </li>
+                </ul>
+              )}
+            </li>
+
+            {/* Inventory Dropdown */}
+            <li>
+              <button
+                onClick={() => toggleDropdown("Inventory")}
+                className={`w-full flex items-center justify-between p-3 rounded-lg transition-all duration-200 text-left ${
+                  active === "Inventory"
+                    ? "bg-[#F8961E] text-white shadow-md"
+                    : "hover:bg-[#F8961E]/10 text-gray-800"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <img
+                    src={inventoryIcon}
+                    alt="Inventory"
+                    className={`w-6 h-6 ${
+                      openDropdown === "Inventory" ? "filter brightness-0 invert" : ""
+                    }`}
+                  />
+                  <span className="font-medium text-lg">Inventory</span>
+                </div>
+                <ChevronDown
+                  className={`w-5 h-5 transition-transform duration-200 ${
+                    openDropdown === "Inventory" ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {openDropdown === "Inventory" && (
+                <ul className="ml-10 mt-2 space-y-2 text-gray-700">
+                  <li>
+                    <button
+                      onClick={() => handleItemClick("Product List")}
+                      className="hover:text-[#F8961E] transition"
+                    >
+                      Product List
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleItemClick("Add Product")}
+                      className="hover:text-[#F8961E] transition"
+                    >
+                      Add Product
+                    </button>
+                  </li>
+                </ul>
+              )}
+            </li>
+
+            {/* Analytics */}
+            <li>
+              <button
+                onClick={() => handleItemClick("Analytics")}
+                className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 text-left ${
+                  active === "Analytics"
+                    ? "bg-[#F8961E] text-white shadow-md"
+                    : "hover:bg-[#F8961E]/10 text-gray-800"
+                }`}
+              >
+                <img
+                  src={analyticsIcon}
+                  alt="Analytics"
+                  className={`w-6 h-6 ${
+                    active === "Analytics" ? "filter brightness-0 invert" : ""
+                  }`}
+                />
+                <span className="font-medium text-lg">Analytics</span>
+              </button>
+            </li>
           </ul>
         </div>
 
@@ -96,7 +223,7 @@ function Navbar() {
       {/* Overlay for mobile */}
       {isOpen && (
         <div
-          className="fixed inset-0"
+          className="fixed inset-0 bg-black/10 backdrop-blur-[1px]"
           onClick={() => setIsOpen(false)}
         ></div>
       )}
