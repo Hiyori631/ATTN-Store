@@ -93,7 +93,7 @@ function Navbar() {
         </div>
       </aside>
 
-      {/* Overlay for mobile */}
+      {/* Overlay for mobiles */}
       {isOpen && (
         <div
           className="fixed inset-0"
