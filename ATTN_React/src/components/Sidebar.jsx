@@ -268,7 +268,7 @@ function Navbar() {
           </ul>
         </div>
 
-        {/* Logout Button */}
+        {/* Logout Buttons */}
         <div className="p-6 border-t border-gray-200">
 <button
   className="w-full flex items-center justify-center gap-2 border-2 border-[#F8961E] text-[#F8961E] bg-white font-semibold py-2.5 rounded-lg shadow-md transition-transform duration-150 hover:bg-[#F8961E] hover:text-white active:scale-95"
