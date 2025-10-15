@@ -9,7 +9,7 @@ function Topbar() {
       {/* Left Section (Title / Logo) */}
       <h1 className="text-2xl font-bold text-[#4D1C0A]">DASHBOARD</h1>
 
-      {/* Right Section (Notificationss + User Info) */}
+      {/* Right Section (Notificationss + User Insfo) */}
       <div className="flex items-center gap-6">
         {/* Notification Icon */}
         <button className="relative p-2 rounded-full border border-[#4D1C0A] text-[#4D1C0A] hover:bg-[#4D1C0A]/10 transition">
