@@ -1,79 +1,86 @@
-import { useState, useEffect } from "react";
-import Navbar from "./components/Sidebar";
-import "./App.css";
+    import { useState, useEffect } from "react";
+    import Navbar from "./components/Sidebar";
+    import Topbar from "./components/Topbar";
+    import "./App.css";
 
-function App() {
-  const [message, setMessage] = useState("Loading...");
+    function App() {
+      const [isSidebarOpen, setIsSidebarOpen] = useState(false); // shared state
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/ATTN_Backend/web_desc/")
-      .then((res) => {
-        if (!res.ok) throw new Error("Network error");
-        return res.json();
-      })
-      .then((data) => setMessage(JSON.stringify(data.recipes, null, 2)))
-      .catch(() => setMessage("Failed to load recipes."));
-  }, []);
+      const [message, setMessage] = useState("Loading...");
 
-  return (
-    <div className="flex flex-col lg:flex-row bg-gray-50 min-h-screen">
-      {/* Sidebar */}
-      <Navbar />
+      useEffect(() => {
+        fetch("http://127.0.0.1:8000/ATTN_Backend/web_desc/")
+          .then((res) => {
+            if (!res.ok) throw new Error("Network error");
+            return res.json();
+          })
+          .then((data) => setMessage(JSON.stringify(data.recipes, null, 2)))
+          .catch(() => setMessage("Failed to load recipes."));
+      }, []);
 
-      {/* Main Contenst */}
-      <main
-        className="
-          flex-1 
-          p-6 sm:p-8 lg:p-10 
-          mt-16 lg:mt-0  /* adds top margin for mobile header */
-          transition-all duration-300
-          lg:ml-72       /* space for sidebar on large screens */
-        "
-      >
-        <div className="flex flex-col gap-6">
-          {/* Header */}
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b border-[#F8961E]/40 pb-4 gap-3">
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
-              Dashboard
-            </h1>
-            <input
-              type="text"
-              placeholder="Search..."
-              className="border rounded-md px-4 py-2 w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-[#F8961E]"
-            />
+      return (
+        <div className="bg-gray-50 min-h-screen flex flex-col">
+          
+
+          {/* Layout container */}
+            {/* Sidebar (fixed width on desktop) */}
+            <div className="hidden lg:block fixed left-0 top-[4rem] h-[calc(100vh-4rem)] w-72 bg-white shadow-md border-r border-gray-100">
+              <Navbar />
+              
+            </div>
+
+            {/* Main Content */}
+
+            
+            <main
+              className="
+                flex-1 
+                transition-all duration-300
+                lg:ml-72    /* ensures content starts after sidebar */
+                mt-0 lg:mt-0
+              "
+            >
+
+              {/* Topbar */}
+          <div className="sticky top-0bg-white shadow-sm">
+            <Topbar />
           </div>
+              
+              <div className="flex flex-col gap-6 p-6 sm:p-8 lg:p-10 
+    ">
+              
 
-          {/* Stats Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-white border-l-4 border-[#F8961E] p-4 rounded-md shadow-sm">
-              <p className="text-sm text-gray-500">Top-Selling Product</p>
-              <h2 className="text-xl font-bold text-[#F8961E] mt-1">
-                Mighty Bond
-              </h2>
-            </div>
-            <div className="bg-white border-l-4 border-[#F8961E] p-4 rounded-md shadow-sm">
-              <p className="text-sm text-gray-500">Total Orders</p>
-              <h2 className="text-xl font-bold text-[#F8961E] mt-1">1234</h2>
-            </div>
-            <div className="bg-white border-l-4 border-[#F8961E] p-4 rounded-md shadow-sm">
-              <p className="text-sm text-gray-500">Total Sales</p>
-              <h2 className="text-xl font-bold text-[#F8961E] mt-1">₱1234</h2>
-            </div>
-          </div>
+                {/* Stats Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="bg-white border-l-4 border-[#F8961E] p-4 rounded-md shadow-sm">
+                    <p className="text-sm text-gray-500">Top-Selling Product</p>
+                    <h2 className="text-xl font-bold text-[#F8961E] mt-1">
+                      Mighty Bond
+                    </h2>
+                  </div>
+                  <div className="bg-white border-l-4 border-[#F8961E] p-4 rounded-md shadow-sm">
+                    <p className="text-sm text-gray-500">Total Orders</p>
+                    <h2 className="text-xl font-bold text-[#F8961E] mt-1">1234</h2>
+                  </div>
+                  <div className="bg-white border-l-4 border-[#F8961E] p-4 rounded-md shadow-sm">
+                    <p className="text-sm text-gray-500">Total Sales</p>
+                    <h2 className="text-xl font-bold text-[#F8961E] mt-1">₱1234</h2>
+                  </div>
+                </div>
 
-          {/* Analytics Box */}
-          <div className="bg-white border border-[#F8961E]/30 rounded-lg p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-gray-700 mb-2">
-              Analytics
-            </h2>
-            <div className="w-full h-60 sm:h-72 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500 text-sm sm:text-base">
-              Analytics Chart Placeholder
-            </div>
-          </div>
+                {/* Analytics Boxs */}
+                <div className="bg-white border border-[#F8961E]/30 rounded-lg p-6 shadow-sm">
+                  <h2 className="text-lg font-semibold text-gray-700 mb-2">
+                    Analytics
+                  </h2>
+                  <div className="w-full h-60 sm:h-72 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500 text-sm sm:text-base">
+                    Analytics Chart Placeholder
+                  </div>
+                </div>
+              </div>
+            </main>
         </div>
-      </main>
-    </div>
-  );
-}
+      );
+    }
 
-export default App;
+    export default App;
