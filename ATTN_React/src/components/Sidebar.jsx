@@ -8,7 +8,7 @@ import { Menu, X } from "lucide-react"; // optional icons for hamburger
 
 function Navbar() {
   const [active, setActive] = useState("Dashboard");
-  const [isOpen, setIsOpen] = useState(false); // for mobile toggle
+  const [isOpen, setIsOpen] = useState(false); // for mobile toggles
 
   const menuItems = [
     { name: "Dashboard", icon: dashboardIcon },
