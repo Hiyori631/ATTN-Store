@@ -220,7 +220,7 @@ function Navbar() {
         </div>
       </aside>
 
-      {/* Overlay for mobile */}
+      {/* Overlay for mobile yeah*/}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/10 backdrop-blur-[1px]"
