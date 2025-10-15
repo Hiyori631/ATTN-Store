@@ -34,7 +34,7 @@ function Navbar() {
         </button>
       </div>
 
-      {/* Sidebar */}
+      {/* Sidebars */}
       <aside
         className={`fixed top-0 left-0 h-screen w-72 bg-white border-r-2 border-[#F8961E] flex flex-col justify-between shadow-md transform transition-transform duration-300 z-40
         ${isOpen ? "translate-x-0" : "-translate-x-full"} 
