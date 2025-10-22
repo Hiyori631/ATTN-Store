@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import logo from "../assets/images/Your paragraph text.png";
 import { ChevronDown } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function Navbar({ isOpen, onClose }) {
   const [active, setActive] = useState("Dashboard");
   const [openDropdown, setOpenDropdown] = useState(null);
+  const navigate = useNavigate();
 
+  const handleLogout = () => {
+    // Optional confirmation
+    const confirmLogout = window.confirm("Are you sure you want to log out?");
+    if (!confirmLogout) return;
+
+    // Remove stored tokens
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+
+    // Redirect to login page
+    navigate("/");
+  };
   const handleItemClick = (name) => {
     setActive(name);
     setOpenDropdown(null);
@@ -235,7 +249,7 @@ function Navbar({ isOpen, onClose }) {
 
         {/* ✅ Logout Button */}
         <div className="p-6 border-t border-gray-200 bg-white">
-          <button className="w-full flex items-center justify-center gap-2 border-2 border-[#F8961E] text-[#F8961E] bg-white font-semibold py-2.5 rounded-lg shadow-md transition-transform duration-150 hover:bg-[#F8961E] hover:text-white active:scale-95">
+          <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 border-2 border-[#F8961E] text-[#F8961E] bg-white font-semibold py-2.5 rounded-lg shadow-md transition-transform duration-150 hover:bg-[#F8961E] hover:text-white active:scale-95">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
