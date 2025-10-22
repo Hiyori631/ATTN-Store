@@ -1,0 +1,10 @@
+.sidebar-fontcolor{
+    color: brown;
+}
+.text-stroke-orange {
+  -webkit-text-stroke: 2px #F8961E; /* stroke thickness + color */
+}
+.radius-custom {
+    border-radius: 15px; /* Adjust the value as needed */
+}
+/* in index.css or App.css */
