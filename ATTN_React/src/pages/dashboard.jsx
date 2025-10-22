@@ -1,7 +1,7 @@
 export default function Dashboard() {
   return (
     <>
-      {/* Stats Cards */}
+      {/* Stats Cards. */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div className="bg-white border-l-4 border-[#F8961E] p-4 rounded-md shadow-sm">
           <p className="text-sm text-gray-500">Top-Selling Product</p>

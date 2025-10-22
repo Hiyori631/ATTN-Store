@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [active, setActive] = useState("Dashboard");
-  const [isOpen, setIsOpen] = useState(false); // mobile sidebar toggle
+  const [isOpen, setIsOpen] = useState(false); // mobile sidebar toggle.
   const [openDropdown, setOpenDropdown] = useState(null); // which dropdown is open
   const navigate = useNavigate();
 

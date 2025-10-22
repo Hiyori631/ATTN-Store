@@ -13,7 +13,7 @@ function App() {
         {/* Public route */}
         <Route path="/" element={<Login />} />
 
-        {/* Protected route with Sidebar and Topbar */}
+        {/* Protected route with Sidebar and. Topbar */}
         <Route
           path="/dashboard"
           element={

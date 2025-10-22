@@ -6,7 +6,7 @@ function Topbar() {
 
   return (
     <div className="h-16 bg-white shadow-md flex items-center justify-between px-6 top-0 left-0 z-30 transition-all duration-300">
-      {/* Left Section (Title / Logo) */}
+      {/* Left Section (Title /. Logo) */}
       <h1 className="text-2xl font-bold text-[#4D1C0A]">DASHBOARD</h1>
 
       {/* Right Section (Notificationss + User Insfo) */}
