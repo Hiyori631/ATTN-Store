@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 import PrivateRoute from "./utility/PrivateRoute";
@@ -7,6 +8,19 @@ import Dashboard from "./pages/dashboard";
 import "./App.css";
 
 function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // shared sidebar state
+  const [message, setMessage] = useState("Loading...");
+
+useEffect(() => {
+    fetch("http://127.0.0.1:8000/ATTN_Backend/web_desc/")
+      .then((res) => {
+        if (!res.ok) throw new Error("Network error");
+        return res.json();
+      })
+      .then((data) => setMessage(JSON.stringify(data.recipes, null, 2)))
+      .catch(() => setMessage("Failed to load recipes."));
+  }, []);
+    
   return (
     <Router>
       <Routes>
@@ -20,11 +34,9 @@ function App() {
             <PrivateRoute>
               <div className="bg-gray-50 min-h-screen flex flex-col">
                 {/* Sidebar */}
-                <div className="hidden lg:block fixed left-0 top-[4rem] h-[calc(100vh-4rem)] w-72 bg-white shadow-md border-r border-gray-100">
-                  <Sidebar />
-                </div>
+                  <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
-                {/* Main Content Area */}
+                {/* Main Content Area */} 
                 <main
                   className="
                     flex-1 
@@ -33,8 +45,8 @@ function App() {
                   "
                 >
                   {/* Topbar */}
-                  <div className="sticky top-0 bg-white shadow-sm z-50">
-                    <Topbar />
+                  <div className="sticky top-0 bg-white shadow-sm">
+                  <Topbar onMenuClick={() => setIsSidebarOpen(true)} />
                   </div>
 
                   {/* Page content (Dashboard) */}

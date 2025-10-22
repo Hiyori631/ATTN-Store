@@ -14,7 +14,7 @@ export default function LoginPage() {
   useEffect(() => {
     const token = localStorage.getItem("access");
     if (token) {
-      navigate("/dashboard"); // already log.ged in, go to dashboard
+      navigate("/dashboard"); // already logged in, go to dashboard
     }
   }, [navigate]);
 
