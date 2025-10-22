@@ -1,7 +1,7 @@
-    import { useState, useEffect } from "react";
-    import Navbar from "./components/Sidebar";
-    import Topbar from "./components/Topbar";
-    import "./App.css";
+import { useState, useEffect } from "react";
+import Navbars from "./components/Navbar";
+import MyImage from "./assets/images/BG-Hero.jpg";
+import "./App.css";
 
     function App() {
       const [isSidebarOpen, setIsSidebarOpen] = useState(false); // shared state
